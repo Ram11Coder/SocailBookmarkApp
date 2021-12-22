@@ -1,6 +1,6 @@
 package com.thrillio.entities;
 
-public class Book {
+public class Book extends Bookmark {
 	private int publicationYear;
 	private String publisher;
 	private String[] authors;

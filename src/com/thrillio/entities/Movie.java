@@ -7,12 +7,12 @@ public class Movie extends Bookmark {
 	private String genre;
 	private double imdbRating;
 
-	public int getYear() {
+	public int getreleaseYear() {
 		return releaseYear;
 	}
 
-	public void setYear(int year) {
-		this.releaseYear = year;
+	public void setreleaseYear(int releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
 	public String[] getCast() {
