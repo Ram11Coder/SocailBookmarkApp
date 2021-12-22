@@ -38,8 +38,8 @@ public class BookmarkManager {
 		return weblink;
 	}
 
-	public Book createBook(long id, String title, String profileUrl, int publicationYear, String publisher, String[] authors, String genre,
-			double amazonRating) {
+	public Book createBook(long id, String title, String profileUrl, int publicationYear, String publisher,
+			String[] authors, String genre, double amazonRating) {
 		Book book = new Book();
 		book.setId(id);
 		book.setTitle(title);
