@@ -1,6 +1,7 @@
 package com.thrillio.entities;
 
 public class Weblink extends Bookmark {
+
 	private String url;
 	private String host;
 
@@ -20,4 +21,8 @@ public class Weblink extends Bookmark {
 		this.host = host;
 	}
 
+	@Override
+	public String toString() {
+		return "Weblink [url=" + url + ", host=" + host + "]";
+	}
 }

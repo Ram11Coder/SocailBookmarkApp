@@ -1,10 +1,12 @@
 package com.thrillio.managers;
 
+import com.thrillio.dao.UserDao;
 import com.thrillio.entities.User;
-
+//Process -  Controller -> Managers -> Dao layer
 public class UserManager {
 
 	private static UserManager instance = new UserManager();
+	private static UserDao dao = new UserDao();
 
 	private UserManager() {
 	}
@@ -13,7 +15,7 @@ public class UserManager {
 		return instance;
 	}
 
-	public static User createUser(long id, String email, String password, String firstName, String lastName, int gender,
+	public  User createUser(long id, String email, String password, String firstName, String lastName, int gender,
 			String userType) {
 		User user = new User();
 		user.setId(id);
@@ -25,5 +27,10 @@ public class UserManager {
 		user.setUserType(userType);
 		return user;
 
+	}
+	
+	
+	public User[] getUsers() {
+		return dao.getUsers();
 	}
 }

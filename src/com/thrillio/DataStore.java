@@ -11,14 +11,25 @@ import com.thrillio.managers.BookmarkManager;
 import com.thrillio.managers.UserManager;
 
 public class DataStore {
-	private static final int USER_BOOKMARK_LIMIT = 5;
-	private static final int BOOKMARK_COUNT_PER_TYPE = 5;
-	private static final int BOOKMARK_TYPES_COUNT = 3;
-	private static final int TOTAL_USER_COUNT = 5;
+	public static final int USER_BOOKMARK_LIMIT = 5;
+	public static final int BOOKMARK_COUNT_PER_TYPE = 5;
+	public static final int BOOKMARK_TYPES_COUNT = 3;
+	public static final int TOTAL_USER_COUNT = 5;
 
 	private static final User users[] = new User[TOTAL_USER_COUNT];
 	private static final Bookmark bookmarks[][] = new Bookmark[BOOKMARK_TYPES_COUNT][BOOKMARK_COUNT_PER_TYPE];
 	private static final UserBookmark userbookmarks[] = new UserBookmark[TOTAL_USER_COUNT * USER_BOOKMARK_LIMIT];
+
+	public static User[] getUsers() {
+		return users;
+	}
+
+	public static Bookmark[][] getBookmarks() {
+		return bookmarks;
+	}
+	/*
+	 * public static UserBookmark[] getUserbookmarks() { return userbookmarks; }
+	 */
 
 	public static void loadData() {
 		loadUsers();
@@ -87,6 +98,13 @@ public class DataStore {
 		users[4] = UserManager.getInstance().createUser(1004, "user4@semanticsquare.com", "test", "Dheeru", "M",
 				Gender.MALE, UserType.CHIEF_EDITOR);
 
+	}
+
+	private static int bookmarkIndex;
+
+	public static void add(UserBookmark userBookmark) {
+		userbookmarks[bookmarkIndex] = userBookmark;
+		bookmarkIndex++;
 	}
 
 }
