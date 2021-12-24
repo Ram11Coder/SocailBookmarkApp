@@ -10,7 +10,7 @@ import com.thrillio.entities.UserBookmark;
 import com.thrillio.managers.BookmarkManager;
 import com.thrillio.managers.UserManager;
 
-public class DataStore {
+public class DataStore { 
 	public static final int USER_BOOKMARK_LIMIT = 5;
 	public static final int BOOKMARK_COUNT_PER_TYPE = 5;
 	public static final int BOOKMARK_TYPES_COUNT = 3;
@@ -104,7 +104,7 @@ public class DataStore {
 
 	public static void add(UserBookmark userBookmark) {
 		userbookmarks[bookmarkIndex] = userBookmark;
-		bookmarkIndex++;
+		bookmarkIndex++; 
 	}
 
 }
