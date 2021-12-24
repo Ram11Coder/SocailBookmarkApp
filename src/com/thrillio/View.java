@@ -5,6 +5,7 @@ import com.thrillio.constants.UserType;
 import com.thrillio.controllers.BookmarkController;
 import com.thrillio.entities.Bookmark;
 import com.thrillio.entities.User;
+import com.thrillio.partner.Shareable;
 
 public class View {
 	public static void Browse(User user, Bookmark[][] bookmarks) {
@@ -25,13 +26,26 @@ public class View {
 				}
 
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
+					// mark as kidfriendly
 
 					if (bookmark.isKidFriendlyEligible()
 							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
 						String kidFriendlyStatus = getKidFriendlyStatusDecision();
 						if (!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
-							bookmark.setKidFriendlyStatus(kidFriendlyStatus);
-							System.out.println("KidFriendly status - " + kidFriendlyStatus + ", " + bookmark);
+							/*
+							 * bookmark.setKidFriendlyStatus(kidFriendlyStatus);
+							 * System.out.println("KidFriendly status - " + kidFriendlyStatus + ", " +
+							 * bookmark);
+							 */
+							BookmarkController.getInstance().setKidFriendlyStatus(user, kidFriendlyStatus, bookmark);
+						}
+					}
+
+					if (bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED)
+							&& bookmark instanceof Shareable) {
+						boolean isShared = shareDecision();
+						if (isShared) {
+							BookmarkController.getInstance().share(user, bookmark);
 						}
 					}
 				}
@@ -49,6 +63,12 @@ public class View {
 		 * BookmarkController.getInstance().saveUserBookmark(user, bookmark);
 		 * System.out.println(bookmark); }
 		 */
+	}
+
+//TODO : In near future we will get the data from IO console
+	private static boolean shareDecision() {
+
+		return Math.random() < 0.4 ? true : false;
 	}
 
 	private static String getKidFriendlyStatusDecision() {
