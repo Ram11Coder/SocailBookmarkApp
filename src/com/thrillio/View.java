@@ -1,5 +1,7 @@
 package com.thrillio;
 
+import java.util.List;
+
 import com.thrillio.constants.KidFriendlyStatus;
 import com.thrillio.constants.UserType;
 import com.thrillio.controllers.BookmarkController;
@@ -8,22 +10,19 @@ import com.thrillio.entities.User;
 import com.thrillio.partner.Shareable;
 
 public class View {
-	public static void Browse(User user, Bookmark[][] bookmarks) {
+	public static void Browse(User user, List<List<Bookmark>>  bookmarks) {
 		System.out.println("\n " + user.getEmail() + " is Browsing ... ");
 
-		int bookmarkCount = 0;
-
-		for (Bookmark[] bookmarksList : bookmarks) {
+		for (List<Bookmark>  bookmarksList : bookmarks) {
 			for (Bookmark bookmark : bookmarksList) {
-				if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
+				//if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
 
 					boolean isBookmarked = getBookmarkDecision(bookmark);
-					if (isBookmarked) {
-						bookmarkCount++;
+					if (isBookmarked) {	
 						BookmarkController.getInstance().saveUserBookmark(user, bookmark);
 						System.out.println("New item bookmarked -- " + bookmark);
 					}
-				}
+				//}
 
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
 					// mark as kidfriendly

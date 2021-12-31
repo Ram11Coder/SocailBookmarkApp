@@ -1,5 +1,7 @@
 package com.thrillio.managers;
 
+import java.util.List;
+
 import com.thrillio.dao.UserDao;
 import com.thrillio.entities.User;
 //Process -  Controller -> Managers -> Dao layer
@@ -30,7 +32,7 @@ public class UserManager {
 	}
 	
 	
-	public User[] getUsers() {
+	public List<User> getUsers() {
 		return dao.getUsers();
 	}
 }
