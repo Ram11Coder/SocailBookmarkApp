@@ -10,26 +10,26 @@ import com.thrillio.entities.User;
 import com.thrillio.partner.Shareable;
 
 public class View {
-	public static void Browse(User user, List<List<Bookmark>>  bookmarks) {
+	public static void Browse(User user, List<List<Bookmark>> bookmarks) {
 		System.out.println("\n " + user.getEmail() + " is Browsing ... ");
 
-		for (List<Bookmark>  bookmarksList : bookmarks) {
+		for (List<Bookmark> bookmarksList : bookmarks) {
 			for (Bookmark bookmark : bookmarksList) {
-				//if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
+				// if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
 
-					boolean isBookmarked = getBookmarkDecision(bookmark);
-					if (isBookmarked) {	
-						BookmarkController.getInstance().saveUserBookmark(user, bookmark);
-						System.out.println("New item bookmarked -- " + bookmark);
-					}
-				//}
+				boolean isBookmarked = getBookmarkDecision(bookmark);
+				if (isBookmarked) {
+					BookmarkController.getInstance().saveUserBookmark(user, bookmark);
+					System.out.println("New item bookmarked -- " + bookmark);
+				}
+				// }
 
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
 					// mark as kidfriendly
 
 					if (bookmark.isKidFriendlyEligible()
 							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
-						String kidFriendlyStatus = getKidFriendlyStatusDecision();
+						KidFriendlyStatus kidFriendlyStatus = getKidFriendlyStatusDecision();
 						if (!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
 							/*
 							 * bookmark.setKidFriendlyStatus(kidFriendlyStatus);
@@ -70,7 +70,7 @@ public class View {
 		return Math.random() < 0.4 ? true : false;
 	}
 
-	private static String getKidFriendlyStatusDecision() {
+	private static KidFriendlyStatus getKidFriendlyStatusDecision() {
 		double random = Math.random();
 		return (random < 0.4) ? KidFriendlyStatus.APPROVED
 				: (random >= 0.4 && random <= 0.8) ? KidFriendlyStatus.REJECTED : KidFriendlyStatus.UNKNOWN;

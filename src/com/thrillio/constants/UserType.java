@@ -1,14 +1,19 @@
 package com.thrillio.constants;
 
 //Constant export class
-public class UserType {
-
-	private UserType() {
-
+public enum UserType {
+	 USER("user"),
+	 EDITOR("editor"),
+	 CHIEF_EDITOR("cheifeditor");
+	
+	private UserType(String name) {
+		this.name = name;
 	}
 
-	public static final String USER = "user";
-	public static final String EDITOR = "editor";
-	public static final String CHIEF_EDITOR = "cheifeditor";
+	private String name;
 
+	public String getName() {
+		return name;
+	}
+	
 }
